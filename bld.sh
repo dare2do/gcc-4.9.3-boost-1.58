@@ -1,24 +1,24 @@
 #!/bin/bash
 #
-# Date: 2014-08-15
+# Date: 2015-09-29
 #
-# This downloads, builds and installs the gcc-4.9.1 compiler and boost
-# 1.56. It handles the dependent packages like gmp-6.0.0a, mpfr-3.1.2,
+# This downloads, builds and installs the gcc-4.9.3 compiler and boost
+# 1.58. It handles the dependent packages like gmp-6.0.0a, mpfr-3.1.3,
 # mpc-1.0.2, ppl-1.1, cloog-0.18.0 and binutils-2.24.
 #
-# To install gcc-4.9.1 in ~/tmp/gcc-4.9.1/rtf/bin you would run this
+# To install gcc-4.9.3 in ~/tmp/gcc-4.9.3/rtf/bin you would run this
 # script as follows:
 #
-#    % # Install in ~/tmp/gcc-4.9.1/rtf/bin
-#    % bld.sh ~/tmp/gcc-4.9.1 2>&1 | tee bld.log
+#    % # Install in ~/tmp/gcc-4.9.3/rtf/bin
+#    % bld.sh ~/tmp/gcc-4.9.3 2>&1 | tee bld.log
 #
 # If you do not specify a directory, then it will install in the
 # current directory which means that following command will also
-# install in ~/tmp/gcc-4.9.1/rtf/bin:
+# install in ~/tmp/gcc-4.9.3/rtf/bin:
 #
-#    % # Install in ~/tmp/gcc-4.9.1/rtf/bin
-#    % mkdir -p ~/tmp/gcc-4.9.1
-#    % cd ~/tmp/gcc-4.9.1
+#    % # Install in ~/tmp/gcc-4.9.3/rtf/bin
+#    % mkdir -p ~/tmp/gcc-4.9.3
+#    % cd ~/tmp/gcc-4.9.3
 #    % bld.sh 2>&1 | tee bld.log
 #
 # This script creates 4 subdirectories:
@@ -307,13 +307,13 @@ function my-readlink
 ARS=(
     http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
     https://gmplib.org/download/gmp/gmp-6.0.0a.tar.bz2
-    http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.bz2
+    http://www.mpfr.org/mpfr-current/mpfr-3.1.3.tar.bz2
     http://www.multiprecision.org/mpc/download/mpc-1.0.2.tar.gz
     http://bugseng.com/products/ppl/download/ftp/releases/1.1/ppl-1.1.tar.bz2
     http://www.bastoul.net/cloog/pages/download/cloog-0.18.1.tar.gz
-    http://ftp.gnu.org/gnu/gcc/gcc-4.9.1/gcc-4.9.1.tar.bz2
+    http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2
     http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.bz2
-    http://sourceforge.net/projects/boost/files/boost/1.56.0/boost_1_56_0.tar.bz2
+    http://sourceforge.net/projects/boost/files/boost/1.58.0/boost_1_58_0.tar.bz2
     #
     # Why glibc is disabled (for now).
     #
@@ -356,7 +356,7 @@ export LD_LIBRARY_PATH="${RTFDIR}/lib:${RTFDIR}/lib64:${LD_LIBRARY_PATH}"
 
 echo
 echo "# ================================================================"
-echo '# Version    : gcc-4.9.1 2014-08-15'
+echo '# Version    : gcc-4.9.3 2015-08-15'
 echo "# RootDir    : $ROOTDIR"
 echo "# ArchiveDir : $ARDIR"
 echo "# RtfDir     : $RTFDIR"
@@ -537,7 +537,7 @@ for ar in ${ARS[@]} ; do
                     if [[ "$plat" == "$macplat" ]] ; then
                         # Special handling for Mac OS X 10.9.
                         # Fix the bad reference to CFBase.h in
-                        # src/gcc-4.9.1/libsanitizer/asan/asan_malloc_mac.cc
+                        # src/gcc-4.9.3/libsanitizer/asan/asan_malloc_mac.cc
                         src="$sd/libsanitizer/asan/asan_malloc_mac.cc"
                         if [ -f $src ] ; then
                             if [ ! -f $src.orig ] ; then
@@ -629,7 +629,7 @@ for ar in ${ARS[@]} ; do
                                 awk \
 '{ \
   if($1=="namespace" && $2 == "std") { \
-    printf("// Automatically patched by bld.sh for gcc-4.9.1.\n"); \
+    printf("// Automatically patched by bld.sh for gcc-4.9.3.\n"); \
     printf("#define tininess_before tinyness_before\n"); \
     printf("#if __GNU_MP_VERSION < 5  || (__GNU_MP_VERSION == 5 && __GNU_MP_VERSION_MINOR < 1)\n");
   } \
