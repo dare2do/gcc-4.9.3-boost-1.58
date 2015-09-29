@@ -7,8 +7,8 @@ To use it:
 
     $ mkdir -p work/gcc
     $ cd work/gcc
-    
-    $ cd 4.9.3
+    $ git clone https://github.com/g1o/gcc-4.9.1-boost-1.56.git
+    $ cd 4.9.1
     $ make
 
 For more detailed information see http://joelinoff.com/blog/?p=1514 (for 4.8.3).
